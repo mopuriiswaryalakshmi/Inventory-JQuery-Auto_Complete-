@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Bills</h1>
+
+<ul id="totalBills">
+
+</ul>
+
+<button id="listBills">
+  Featch bills
+</button>
+
+<br>
+
+<%= link_to "New Bill ", new_bill_path %>
+
+<script >
+  $(document).ready(function(){
+    $('#listBills').on('click',function(){
+      var output = "";
+      $.getJSON('bills.json', function(bills){
+        $.each(bills,function(index,bill){
+          output += "<li>Total: " + bill.total + "</li>";
+        });
+        $('#totalBills').html(output);
+      });
+
+    });
+
+  });
+</script>

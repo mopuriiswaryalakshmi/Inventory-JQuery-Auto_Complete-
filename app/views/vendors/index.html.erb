@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Vendors</h1>
+<label>Search Vendors</label>
+<input type="text" id="vendor" />
+
+<ul  id="listingVendors">
+  
+</ul>
+<br>
+
+<%= link_to 'New Vendor', new_vendor_path %>
+
+<!--
+ <script >
+  $(document).ready(function(){
+    $('#vendor').on('keyup',function(){
+      var name = $('#vendor').val();
+      $.getJSON('vendors.json?name=' + name, function(vendors){
+        var output = "";
+        $.each(vendors, function(index,vendor){
+          output += "<li>" + vendor.name + "</li>";
+        });
+        $('#listingVendors').html(output);
+      });
+
+    });
+  });
+</script>
+ -->
+ <script >
+  $(document).ready(function(){
+    $('#vendor').on('keyup',function(){
+      var name = $('#vendor').val();
+      $.getJSON('vendors.json?name=' + name, function(vendors){
+        var output = "";
+        $.each(vendors, function(index,vendor){
+          output += "<li>" +"<a href='/vendors/"+ vendor.id + "'>"+ vendor.name + "</li>";
+        });
+        $('#listingVendors').html(output);
+      });
+
+    });
+  });
+</script>

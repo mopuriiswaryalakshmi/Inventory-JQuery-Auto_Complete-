@@ -1,0 +1,56 @@
+<%= form_for(@bill) do |f| %>
+  <% if @bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bill.errors.count, "error") %> prohibited this bill from being saved:</h2>
+
+      <ul>
+      <% @bill.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price, id: "price" %>
+  </div>
+  <div class="field">
+    <%= f.label :tax %><br>
+    <%= f.text_field :tax, id: "tax" %>
+  </div>
+  <div class="field">
+    <%= f.label :total %><br>
+    <%= f.text_field :total, id: "total",readonly: true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script>
+var priceValueHandle;
+var taxValueHandle;
+//var totalValueHandle = $('#total');
+var total;
+
+function calcTotal(){
+  total=priceValueHandle+(priceValueHandle*taxValueHandle/100);
+  if(!isNaN(total)){
+    $('#total').val(total);
+  }
+}
+
+
+  $('#price').on('blur',function(){
+    priceValueHandle = Number($('#price').val());
+    calcTotal();
+
+  });
+
+
+$('#tax').on('blur',function(){
+  taxValueHandle = Number($('#tax').val());
+  calcTotal();
+});
+</script>
